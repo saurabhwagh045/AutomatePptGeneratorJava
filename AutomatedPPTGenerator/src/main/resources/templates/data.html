@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Questions and Choices</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f7fc;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+.container {
+	width: 80%;
+	max-width: 900px;
+	background-color: #ffffff;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	position: relative; /* Added to enable absolute positioning of the link */
+}
+
+h1 {
+	color: #5f6368;
+	font-size: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 1.5rem;
+}
+
+th, td {
+	padding: 1rem;
+	border: 1px solid #ddd;
+	text-align: left;
+}
+
+th {
+	background-color: #4CAF50;
+	color: white;
+	font-size: 1rem;
+}
+
+td {
+	font-size: 0.9rem;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+a {
+	color: #1e88e5;
+	text-decoration: none;
+	font-size: 1rem;
+	transition: color 0.3s;
+}
+
+a:hover {
+	color: #0d47a1;
+}
+
+.back-link {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 1rem;
+	color: #1e88e5;
+	text-decoration: none;
+}
+
+.back-link:hover {
+	color: #0d47a1;
+}
+</style>
+</head>
+<body>
+
+	<div class="container">
+		<a href="/home" class="back-link">Back to Home</a>
+		<h1>All Questions and Choices</h1>
+
+		<!-- Check if questions are not empty -->
+		<div th:if="${#lists.isEmpty(questions)}">
+			<p>No questions available to display.</p>
+		</div>
+
+		<div th:if="${!#lists.isEmpty(questions)}">
+			<table>
+				<thead>
+					<tr>
+						<th>Question No</th>
+						<th>Question Text</th>
+						<th>Choice A</th>
+						<th>Choice B</th>
+						<th>Choice C</th>
+						<th>Choice D</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- Iterate over the questions list -->
+					<tr th:each="question : ${questions}">
+						<td th:text="${question.id}"></td>
+						<td th:text="${question.questionText}"></td>
+						<td th:text="${question.choiceA}"></td>
+						<td th:text="${question.choiceB}"></td>
+						<td th:text="${question.choiceC}"></td>
+						<td th:text="${question.choiceD}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<a href="/generatePPT">Generate PPT</a>
+		<br><br>
+		<a href="/generatePPTwithbg">Generate PPT With Background IMG</a><br><br>
+	</div>
+
+</body>
+</html>

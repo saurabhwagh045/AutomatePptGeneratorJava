@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated PPT Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120vh;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 50%; /* Further reduced the width */
+            max-width: 600px; /* Further reduced max-width */
+            background-color: #ffffff;
+            padding: 1rem; /* Further reduced padding */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #5f6368;
+            font-size: 1.125rem; /* Further reduced font size */
+            margin-bottom: 0.8rem; /* Further reduced margin */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem; /* Further reduced gap */
+            margin-bottom: 1.2rem; /* Further reduced margin */
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.7rem; /* Further reduced font size */
+        }
+
+        input[type="text"] {
+            padding: 0.6rem; /* Further reduced padding */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.7rem; /* Further reduced font size */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 0.6rem; /* Further reduced padding */
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.725rem; /* Further reduced font size */
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            color: #1e88e5;
+            text-decoration: none;
+            font-size: 0.8rem; /* Further reduced font size */
+            margin: 0.5rem; /* Further reduced margin */
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #0d47a1;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #f1f1f1;
+            padding: 0.6rem; /* Further reduced padding */
+            margin: 0.3rem 0; /* Further reduced margin */
+            border-radius: 5px;
+            font-size: 0.7rem; /* Further reduced font size */
+            text-align: left;
+        }
+
+        .notification {
+            padding: 0.6rem; /* Further reduced padding */
+            background-color: #e7f7e4;
+            color: #4caf50;
+            border: 1px solid #4caf50;
+            border-radius: 5px;
+            display: none;
+            margin-top: 0.8rem; /* Further reduced margin */
+        }
+
+    </style>
+    <script>
+        function showNotification(message) {
+            const notification = document.querySelector('.notification');
+            notification.innerHTML = message;
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        function validateForm() {
+            const inputs = document.querySelectorAll('input[type="text"]');
+            let valid = true;
+            inputs.forEach(input => {
+                if (input.value.trim() === '') {
+                    input.style.borderColor = 'red';
+                    valid = false;
+                } else {
+                    input.style.borderColor = '#ddd';
+                }
+            });
+            return valid;
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <h1>Automated PPT Generator</h1>
+
+    <div class="notification"></div>
+
+    <form action="/addQuestion" method="post" onsubmit="return validateForm()">
+        <label>Question:</label>
+        <input type="text" name="questionText" required><br>
+
+        <label>Choice A:</label>
+        <input type="text" name="choiceA" required><br>
+
+        <label>Choice B:</label>
+        <input type="text" name="choiceB" required><br>
+
+        <label>Choice C:</label>
+        <input type="text" name="choiceC" required><br>
+
+        <label>Choice D:</label>
+        <input type="text" name="choiceD" required><br>
+
+        <button type="submit" onclick="showNotification('Question added successfully!')">Add Question</button>
+    </form>
+
+    <a href="/data">see All Questions.</a><br><br><br>
+    
+</div>
+
+</body>
+</html>
